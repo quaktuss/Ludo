@@ -32,7 +32,7 @@ client.on('message', message => {
         client.commands.get(command).execute(message, args);
     } catch (error) {
         console.error(error);
-        message.reply('there was an error trying to execute that command!');
+        message.reply('La commande ne fonctionne pas camarade. <@193330775452549121> est nul en programmation..');
     }
 });
 
