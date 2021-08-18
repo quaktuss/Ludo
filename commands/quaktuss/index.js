@@ -1,7 +1,7 @@
 module.exports = {
     name: 'quaktuss',
     description: 'ping noob quaktuss',
-    execute(message) {
+    execute(message, args) {
         message.channel.send('<@193330775452549121>');
     },
 };
