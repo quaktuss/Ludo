@@ -44,7 +44,7 @@ client.on('message', message => {
 
 /*** MEDIAVENIR TWEET SCRAPPING ***/
 // Specify destination channel ID below
-const dest = '797873399241637888';
+const dest = '880491113062989895';
 
 // Create a stream to follow tweets
 const stream = twitterClient.stream('statuses/filter', {
