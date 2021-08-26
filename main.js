@@ -1,23 +1,29 @@
-const path = require('path');
 const fs = require('fs');
 // require the discord.js module
 const Discord = require('discord.js');
 require('dotenv').config();
 // create a new Discord client
 const client = new Discord.Client();
-const prefix = '!!';
-
+const prefix = process.env.PREFIX;
 client.commands = new Discord.Collection();
+const Twitter = require('twit');
+const twitterConf = {
+    consumer_key: process.env.TWITTER_API_KEY,
+    consumer_secret: process.env.TWITTER_API_SECRET,
+    access_token: process.env.TWITTER_ACCESS_TOKEN_KEY,
+    access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
+}
+const twitterClient = new Twitter(twitterConf);
 
+//Say when Ludo is online
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 });
 
 const commandFolder = fs.readdirSync('./commands');
-
 for (const folder of commandFolder) {
-        const command = require(`./commands/${folder}/index.js`);
-        client.commands.set(command.name, command);
+    const command = require(`./commands/${folder}/index.js`);
+    client.commands.set(command.name, command);
 }
 
 client.on('message', message => {
@@ -36,5 +42,28 @@ client.on('message', message => {
     }
 });
 
+/*** MEDIAVENIR TWEET SCRAPPING ***/
+// Specify destination channel ID below
+const dest = '797873399241637888';
 
+// Create a stream to follow tweets
+const stream = twitterClient.stream('statuses/filter', {
+    follow: '1214315619031478272', // @Mediavenir, specify whichever Twitter ID you want to follow
+});
+
+
+stream.on('tweet', tweet => {
+    if (tweet.in_reply_to_status_id
+        || tweet.in_reply_to_status_id_str
+        || tweet.in_reply_to_user_id
+        || tweet.in_reply_to_user_id_str
+        || tweet.in_reply_to_screen_name) return true;
+
+    if (tweet.retweeted_status) return true;
+
+    const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
+    client.channels.cache.get(dest).send(twitterMessage);
+    return false;
+});
+//token
 client.login(process.env.TOKEN);
