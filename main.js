@@ -45,25 +45,42 @@ client.on('message', message => {
 /*** MEDIAVENIR TWEET SCRAPPING ***/
 // Specify destination channel ID below
 const dest = '880491113062989895';
-
 // Create a stream to follow tweets
 const stream = twitterClient.stream('statuses/filter', {
     follow: '1214315619031478272', // @Mediavenir, specify whichever Twitter ID you want to follow
 });
-
-
 stream.on('tweet', tweet => {
     if (tweet.in_reply_to_status_id
         || tweet.in_reply_to_status_id_str
         || tweet.in_reply_to_user_id
         || tweet.in_reply_to_user_id_str
         || tweet.in_reply_to_screen_name) return true;
-
     if (tweet.retweeted_status) return true;
 
     const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
     client.channels.cache.get(dest).send(twitterMessage);
     return false;
 });
+
+/*** CONFESSFANTASM TWEET SCRAPPING ***/
+// Specify destination channel ID below
+const confessionDest = '883679812974161951';
+// Create a stream to follow tweets
+const streamConfession = twitterClient.stream('statuses/filter', {
+    follow: '1222195059891875846', // @_Confessfantasm, specify whichever Twitter ID you want to follow
+});
+streamConfession.on('tweet', tweet => {
+    if (tweet.in_reply_to_status_id
+        || tweet.in_reply_to_status_id_str
+        || tweet.in_reply_to_user_id
+        || tweet.in_reply_to_user_id_str
+        || tweet.in_reply_to_screen_name) return true;
+    if (tweet.retweeted_status) return true;
+
+    const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
+    client.channels.cache.get(confessionDest).send(twitterMessage);
+    return false;
+});
+
 //token
 client.login(process.env.TOKEN);
