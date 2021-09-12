@@ -1,0 +1,11 @@
+---
+application:
+  name: "ludo"
+  project: "ludo bot discord"
+  organization: "QoveryCommunity"
+routers:
+  - name: "main-ludo"
+    routes:
+      - application_name: "ludo"
+        paths:
+          - "/*"
