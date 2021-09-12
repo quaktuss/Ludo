@@ -1,9 +1,9 @@
-FROM node
+FROM node:lts
 
 WORKDIR /
 
 COPY . .
 
-RUN npm i 
+RUN npm install
 
-CMD node main.js
+CMD ["node", "main.js"]

@@ -13,7 +13,7 @@
     "twit": "^2.2.11"
   },
   "engines": {
-    "node": "*",
+    "node": "14.17.6",
     "npm": "*"
   },
   "scripts": {
