@@ -42,14 +42,14 @@ client.on('message', message => {
     }
 });
 
-/*** MEDIAVENIR TWEET SCRAPPING ***/
+/*** CONFLITSFRANCE TWEET SCRAPPING ***/
 // Specify destination channel ID below
 const dest = '880491113062989895';
 // Create a stream to follow tweets
-const stream = twitterClient.stream('statuses/filter', {
-    follow: '1214315619031478272', // @Mediavenir, specify whichever Twitter ID you want to follow
+const ConflitsFrance = twitterClient.stream('statuses/filter', {
+    follow: '971820228', // @Conflitsfrance's twitterID
 });
-stream.on('tweet', tweet => {
+ConflitsFrance.on('tweet', tweet => {
     if (tweet.in_reply_to_status_id
         || tweet.in_reply_to_status_id_str
         || tweet.in_reply_to_user_id
@@ -66,10 +66,10 @@ stream.on('tweet', tweet => {
 // Specify destination channel ID below
 const confessionDest = '883679812974161951';
 // Create a stream to follow tweets
-const streamConfession = twitterClient.stream('statuses/filter', {
-    follow: '1222195059891875846', // @_Confessfantasm, specify whichever Twitter ID you want to follow
+const Confessfantasm = twitterClient.stream('statuses/filter', {
+    follow: '1222195059891875846', // @_Confessfantasm's twitterID
 });
-streamConfession.on('tweet', tweet => {
+Confessfantasm.on('tweet', tweet => {
     if (tweet.in_reply_to_status_id
         || tweet.in_reply_to_status_id_str
         || tweet.in_reply_to_user_id
