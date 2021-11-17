@@ -42,14 +42,15 @@ client.on('message', message => {
     }
 });
 
-/*** CONFLITSFRANCE TWEET SCRAPPING ***/
-// Specify destination channel ID below
+
+/*** MEDIAVENIR TWEET SCRAPPING ***/
+// Specify destination channel ID below :: 1214315619031478272
 const dest = '880491113062989895';
 // Create a stream to follow tweets
-const ConflitsFrance = twitterClient.stream('statuses/filter', {
-    follow: '971820228', // @Conflitsfrance's twitterID
+const Mediavenir = twitterClient.stream('statuses/filter', {
+    follow: '1214315619031478272', // @Mediavenir's twitterID
 });
-ConflitsFrance.on('tweet', tweet => {
+Mediavenir.on('tweet', tweet => {
     if (tweet.in_reply_to_status_id
         || tweet.in_reply_to_status_id_str
         || tweet.in_reply_to_user_id
@@ -61,6 +62,7 @@ ConflitsFrance.on('tweet', tweet => {
     client.channels.cache.get(dest).send(twitterMessage);
     return false;
 });
+
 
 /*** CONFESSFANTASM TWEET SCRAPPING ***/
 // Specify destination channel ID below
@@ -82,5 +84,26 @@ Confessfantasm.on('tweet', tweet => {
     return false;
 });
 
+/*** CONFLITSFRANCE TWEET SCRAPPING ***/
+// Specify destination channel ID below :: 1214315619031478272
+/*const dest = '880491113062989895';
+// Create a stream to follow tweets
+const ConflitsFrance = twitterClient.stream('statuses/filter', {
+    follow: '971820228', // @Conflitsfrance's twitterID
+});
+ConflitsFrance.on('tweet', tweet => {
+    if (tweet.in_reply_to_status_id
+        || tweet.in_reply_to_status_id_str
+        || tweet.in_reply_to_user_id
+        || tweet.in_reply_to_user_id_str
+        || tweet.in_reply_to_screen_name) return true;
+    if (tweet.retweeted_status) return true;
+
+    const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
+    client.channels.cache.get(dest).send(twitterMessage);
+    return false;
+});*/
 //token
 client.login(process.env.TOKEN);
+
+
