@@ -86,7 +86,6 @@ Confessfantasm.on('tweet', tweet => {
 
 /*** CONFLITSFRANCE TWEET SCRAPPING ***/
 // Specify destination channel ID below :: 1214315619031478272
-/*const dest = '880491113062989895';
 // Create a stream to follow tweets
 const ConflitsFrance = twitterClient.stream('statuses/filter', {
     follow: '971820228', // @Conflitsfrance's twitterID
@@ -99,11 +98,9 @@ ConflitsFrance.on('tweet', tweet => {
         || tweet.in_reply_to_screen_name) return true;
     if (tweet.retweeted_status) return true;
 
-    const twitterMessage = `${tweet.user.name} (@${tweet.user.screen_name}) tweeted this: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
+    const twitterMessage = `https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`
     client.channels.cache.get(dest).send(twitterMessage);
     return false;
-});*/
+});
 //token
 client.login(process.env.TOKEN);
-
-
